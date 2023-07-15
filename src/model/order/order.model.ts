@@ -5,7 +5,10 @@ export interface Order {
   current_state: OrderState;
   store: Store;
   eater: Eater;
-  eaters: Eater2[];
+  eaters: {
+    id: string;
+    first_name: string;
+  }[];
   cart: Cart;
   payment: Payment;
   placed_at: string;
@@ -40,11 +43,6 @@ export interface Eater {
   phone_code: string;
 }
 
-export interface Eater2 {
-  id: string;
-  first_name: string;
-}
-
 export interface Cart {
   items: Item[];
   fulfillment_issues: FulfillmentIssue[];
@@ -60,43 +58,25 @@ export interface Item {
   selected_modifier_groups?: SelectedModifierGroup[];
   eater_id: string;
   special_instructions?: string;
-  taxInfo?: TaxInfo2;
+  taxInfo?: {
+    labels: string[];
+  };
 }
 
 export interface Price {
-  unit_price: UnitPrice;
-  total_price: TotalPrice;
-  base_unit_price: BaseUnitPrice;
-  base_total_price: BaseTotalPrice;
-  taxInfo?: TaxInfo;
+  unit_price: BasePrice;
+  total_price: BasePrice;
+  base_unit_price: BasePrice;
+  base_total_price: BasePrice;
+  taxInfo?: {
+    labels: string[];
+  };
 }
 
-export interface UnitPrice {
+export interface BasePrice {
   amount: number;
   currency_code: string;
   formatted_amount: string;
-}
-
-export interface TotalPrice {
-  amount: number;
-  currency_code: string;
-  formatted_amount: string;
-}
-
-export interface BaseUnitPrice {
-  amount: number;
-  currency_code: string;
-  formatted_amount: string;
-}
-
-export interface BaseTotalPrice {
-  amount: number;
-  currency_code: string;
-  formatted_amount: string;
-}
-
-export interface TaxInfo {
-  labels: string[];
 }
 
 export interface SelectedModifierGroup {
@@ -112,39 +92,8 @@ export interface SelectedItem {
   title: string;
   external_data: string;
   quantity: number;
-  price: Price2;
+  price: Price;
   default_quantity: number;
-}
-
-export interface Price2 {
-  unit_price: UnitPrice2;
-  total_price: TotalPrice2;
-  base_unit_price: BaseUnitPrice2;
-  base_total_price: BaseTotalPrice2;
-}
-
-export interface UnitPrice2 {
-  amount: number;
-  currency_code: string;
-  formatted_amount: string;
-}
-
-export interface TotalPrice2 {
-  amount: number;
-  currency_code: string;
-  formatted_amount: string;
-}
-
-export interface BaseUnitPrice2 {
-  amount: number;
-  currency_code: string;
-  formatted_amount: string;
-}
-
-export interface BaseTotalPrice2 {
-  amount: number;
-  currency_code: string;
-  formatted_amount: string;
 }
 
 export interface RemovedItem {
@@ -152,43 +101,8 @@ export interface RemovedItem {
   title: string;
   external_data: string;
   quantity: number;
-  price: Price3;
+  price: Price;
   default_quantity: number;
-}
-
-export interface Price3 {
-  unit_price: UnitPrice3;
-  total_price: TotalPrice3;
-  base_unit_price: BaseUnitPrice3;
-  base_total_price: BaseTotalPrice3;
-}
-
-export interface UnitPrice3 {
-  amount: number;
-  currency_code: string;
-  formatted_amount: string;
-}
-
-export interface TotalPrice3 {
-  amount: number;
-  currency_code: string;
-  formatted_amount: string;
-}
-
-export interface BaseUnitPrice3 {
-  amount: number;
-  currency_code: string;
-  formatted_amount: string;
-}
-
-export interface BaseTotalPrice3 {
-  amount: number;
-  currency_code: string;
-  formatted_amount: string;
-}
-
-export interface TaxInfo2 {
-  labels: string[];
 }
 
 export interface FulfillmentIssue {
@@ -222,41 +136,10 @@ export interface ItemSubstitute {
   title: string;
   external_data: string;
   quantity: number;
-  price: Price4;
+  price: Price;
   selected_modifier_groups: any;
   special_instructions: string;
   instance_id: string;
-}
-
-export interface Price4 {
-  unit_price: UnitPrice4;
-  total_price: TotalPrice4;
-  base_unit_price: BaseUnitPrice4;
-  base_total_price: BaseTotalPrice4;
-}
-
-export interface UnitPrice4 {
-  amount: number;
-  currency_code: string;
-  formatted_amount: string;
-}
-
-export interface TotalPrice4 {
-  amount: number;
-  currency_code: string;
-  formatted_amount: string;
-}
-
-export interface BaseUnitPrice4 {
-  amount: number;
-  currency_code: string;
-  formatted_amount: string;
-}
-
-export interface BaseTotalPrice4 {
-  amount: number;
-  currency_code: string;
-  formatted_amount: string;
 }
 
 export interface Payment {
@@ -265,41 +148,11 @@ export interface Payment {
 }
 
 export interface Charges {
-  total: Total;
-  sub_total: SubTotal;
-  tax: Tax;
-  total_fee: TotalFee;
-  cash_amount_due: CashAmountDue;
-}
-
-export interface Total {
-  amount: number;
-  currency_code: string;
-  formatted_amount: string;
-}
-
-export interface SubTotal {
-  amount: number;
-  currency_code: string;
-  formatted_amount: string;
-}
-
-export interface Tax {
-  amount: number;
-  currency_code: string;
-  formatted_amount: string;
-}
-
-export interface TotalFee {
-  amount: number;
-  currency_code: string;
-  formatted_amount: string;
-}
-
-export interface CashAmountDue {
-  amount: number;
-  currency_code: string;
-  formatted_amount: string;
+  total: BasePrice;
+  sub_total: BasePrice;
+  tax: BasePrice;
+  total_fee: BasePrice;
+  cash_amount_due: BasePrice;
 }
 
 export interface Accounting {
@@ -332,50 +185,30 @@ export interface Value {
 }
 
 export interface TaxReporting {
-  breakdown: Breakdown;
+  breakdown: {
+    items: Item2[];
+  };
   destination: Destination;
   origin: Origin;
 }
 
-export interface Breakdown {
-  items: Item2[];
-}
-
 export interface Item2 {
   description: string;
-  gross_amount: GrossAmount;
+  gross_amount: BasePrice;
   instance_id: string;
-  net_amount: NetAmount;
+  net_amount: BasePrice;
   taxes: Tax3[];
-  total_tax: TotalTax;
-}
-
-export interface GrossAmount {
-  amount: number;
-  currency_code: string;
-  formatted_amount: string;
-}
-
-export interface NetAmount {
-  amount: number;
-  currency_code: string;
-  formatted_amount: string;
+  total_tax: BasePrice;
 }
 
 export interface Tax3 {
-  calculated_tax: CalculatedTax;
+  calculated_tax: BasePrice;
   imposition: Imposition;
   is_inclusive: boolean;
   jurisdiction: Jurisdiction;
   rate: string;
   tax_remittance: string;
-  taxable_amount: TaxableAmount;
-}
-
-export interface CalculatedTax {
-  amount: number;
-  currency_code: string;
-  formatted_amount: string;
+  taxable_amount: BasePrice;
 }
 
 export interface Imposition {
@@ -386,18 +219,6 @@ export interface Imposition {
 export interface Jurisdiction {
   level: string;
   name: string;
-}
-
-export interface TaxableAmount {
-  amount: number;
-  currency_code: string;
-  formatted_amount: string;
-}
-
-export interface TotalTax {
-  amount: number;
-  currency_code: string;
-  formatted_amount: string;
 }
 
 export interface Destination {
@@ -444,7 +265,10 @@ export class GetOrderDetailsResponse implements Order {
   deliveries: Delivery[];
   display_id: string;
   eater: Eater;
-  eaters: Eater2[];
+  eaters: {
+    id: string;
+    first_name: string;
+  }[];
   estimated_ready_for_pickup_at: string;
   external_reference_id: string;
   id: string;
@@ -461,7 +285,10 @@ export class GetOrderDetailsResponse implements Order {
     deliveries: Delivery[],
     display_id: string,
     eater: Eater,
-    eaters: Eater2[],
+    eaters: {
+      id: string;
+      first_name: string;
+    }[],
     estimated_ready_for_pickup_at: string,
     external_reference_id: string,
     id: string,
