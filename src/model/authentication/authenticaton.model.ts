@@ -16,13 +16,13 @@ export class Authentication {
   public client_secret: string;
   public client_id: string;
   public grant_type: string;
-  public scope: Scope[];
+  public scope: string;
 
-  constructor(client_secret: string, client_id: string, grant_type: string, scope: Scope[]) {
-    this.client_secret = client_secret;
-    this.client_id = client_id;
-    this.grant_type = grant_type;
-    this.scope = scope;
+  constructor(clientSecret: string, clientId: string, grantType: GrantType, scope: Scope[]) {
+    this.client_secret = clientSecret;
+    this.client_id = clientId;
+    this.grant_type = grantType;
+    this.scope = scope.join(' ');
   }
 }
 
