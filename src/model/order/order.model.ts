@@ -522,7 +522,6 @@ export class GetLatestCancelledOrdersResponse {
 }
 
 export class AcceptOrder {
-  public order_id: string;
   public reason: string;
   public external_reference_id: string;
   public fields_relayed: {
@@ -531,7 +530,6 @@ export class AcceptOrder {
   };
 
   constructor(
-    orderId: string,
     reason: string,
     external_reference_id: string,
     fields_relayed: {
@@ -539,7 +537,6 @@ export class AcceptOrder {
       promotions: true;
     },
   ) {
-    this.order_id = orderId;
     this.reason = reason;
     this.external_reference_id = external_reference_id;
     this.fields_relayed = fields_relayed;
@@ -563,7 +560,6 @@ export enum DenyReasonCode {
 }
 
 export class DenyOrder {
-  public order_id: string;
   public reason: {
     explanation: string;
     code: DenyReasonCode;
@@ -571,34 +567,23 @@ export class DenyOrder {
     invalid_items: string[];
   };
 
-  constructor(
-    orderId: string,
-    reason: {
-      explanation: string;
-      code: DenyReasonCode;
-      out_of_stock_items: string[];
-      invalid_items: string[];
-    },
-  ) {
-    this.order_id = orderId;
+  constructor(reason: {
+    explanation: string;
+    code: DenyReasonCode;
+    out_of_stock_items: string[];
+    invalid_items: string[];
+  }) {
     this.reason = reason;
   }
 }
 
 export class DenyOrderResponse {}
 
-export class CancelOrder {
-  public order_id: string;
-
-  constructor(orderId: string) {
-    this.order_id = orderId;
-  }
-}
+export class CancelOrder {}
 
 export class CancelOrderResponse {}
 
 export class PatchCart {
-  public order_id: string;
   public fulfillment_issues: {
     fulfillment_issue_type: 'OUT_OF_ITEM' | 'PARTIAL_AVAILABILITY';
     fulfillment_action_type: 'REMOVE_ITEM' | 'REPLACE_FOR_ME';
@@ -621,7 +606,6 @@ export class PatchCart {
   }[];
 
   constructor(
-    orderId: string,
     fulfillment_issues: {
       fulfillment_issue_type: 'OUT_OF_ITEM' | 'PARTIAL_AVAILABILITY';
       fulfillment_action_type: 'REMOVE_ITEM' | 'REPLACE_FOR_ME';
@@ -634,7 +618,6 @@ export class PatchCart {
       item_availability_info: { items_available: number };
     }[],
   ) {
-    this.order_id = orderId;
     this.fulfillment_issues = fulfillment_issues;
   }
 }
