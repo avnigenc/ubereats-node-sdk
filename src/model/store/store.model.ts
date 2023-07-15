@@ -112,7 +112,7 @@ export class GetRestaurantStatus {
   }
 }
 
-export class GetRestaurantResponse {
+export class GetRestaurantStatusResponse {
   status: 'ONLINE' | 'OFFLINE';
   offlineReason: 'OUT_OF_MENU_HOURS' | 'INVISIBLE' | 'PAUSED_BY_UBER' | 'PAUSED_BY_RESTAURANT';
 
@@ -126,13 +126,11 @@ export class GetRestaurantResponse {
 }
 
 export class SetRestaurantStatus {
-  public store_id: string;
   public status: 'ONLINE' | 'PAUSED';
   public paused_until: string;
   public reason: string;
 
-  constructor(storeId: string, status: 'ONLINE' | 'PAUSED', paused_until: string, reason: string) {
-    this.store_id = storeId;
+  constructor(status: 'ONLINE' | 'PAUSED', paused_until: string, reason: string) {
     this.status = status;
     this.paused_until = paused_until;
     this.reason = reason;
@@ -166,7 +164,6 @@ export class GetStoreHolidayHoursResponse {
 }
 
 export class SetStoreHolidayHours {
-  public store_id: string;
   public holiday_hours: Record<
     string,
     {
@@ -178,7 +175,6 @@ export class SetStoreHolidayHours {
   >;
 
   constructor(
-    storeId: string,
     holiday_hours: Record<
       string,
       {
@@ -186,7 +182,6 @@ export class SetStoreHolidayHours {
       }
     >,
   ) {
-    this.store_id = storeId;
     this.holiday_hours = holiday_hours;
   }
 }
