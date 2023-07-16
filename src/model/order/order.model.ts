@@ -157,7 +157,7 @@ export interface Charges {
 
 export interface Accounting {
   taxRemittance: TaxRemittance;
-  tax_reporting: TaxReporting;
+  tax_reporting?: TaxReporting;
 }
 
 export interface TaxRemittance {
