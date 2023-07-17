@@ -5,6 +5,10 @@
     "require": "./build/index.js",
     "import": "./build/index.js"
   },
+  "author": {
+    "email": "avnignc@gmail.com",
+    "name": "Avni Genc"
+  },
   "types": "./build/index.d.ts",
   "license": "MIT",
   "engines": {
