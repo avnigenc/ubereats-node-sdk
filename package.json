@@ -1,8 +1,10 @@
 {
   "name": "ubereats-sdk",
-  "version": "0.0.0-development",
-  "type": "module",
-  "exports": "./build/index.js",
+  "version": "0.0.6-development",
+  "exports": {
+    "require": "./build/index.js",
+    "import": "./build/index.js"
+  },
   "types": "./build/index.d.ts",
   "license": "MIT",
   "engines": {

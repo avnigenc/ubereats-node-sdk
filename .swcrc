@@ -9,6 +9,15 @@
     "type": "es6",
     "noInterop": false
   },
+  "module": {
+      "type": "commonjs",
+
+      // These are defaults.
+      "strict": false,
+      "strictMode": true,
+      "lazy": false,
+      "noInterop": false
+    }
   "exclude": ["__tests__"],
   "sourceMaps": true,
   "minify": true
